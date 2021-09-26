@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+  let [r, setR] = React.useState();
+
+  React.useEffect(() => {
+    fetch("http://localhost:3000/")
+      .then((res) => res.json())
+      .then((data) => {
+        setR(data.result);
+      });
+  }, []); // <-- Have to pass in [] here!
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>api call result:</h2>
+      <h3>{r}</h3>
     </div>
   );
 }
